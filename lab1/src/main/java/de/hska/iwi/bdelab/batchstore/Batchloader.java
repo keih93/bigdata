@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
 
@@ -15,16 +16,11 @@ import com.backtype.hadoop.pail.Pail.TypedRecordOutputStream;
 
 import de.hska.iwi.bdelab.schema.Data;
 import de.hska.iwi.bdelab.schema.DataUnit;
-import de.hska.iwi.bdelab.schema.FriendEdge;
-import de.hska.iwi.bdelab.schema.GenderType;
 import de.hska.iwi.bdelab.schema.PageID;
 import de.hska.iwi.bdelab.schema.PageViewEdge;
 import de.hska.iwi.bdelab.schema.Pedigree;
 import de.hska.iwi.bdelab.schema.UserID;
-import de.hska.iwi.bdelab.schema.UserProperty;
-import de.hska.iwi.bdelab.schema.UserPropertyValue;
 import manning.tap.DataPailStructure;
-import manning.tap.SplitDataPailStructure;
 
 public class Batchloader {
 
@@ -65,36 +61,31 @@ public class Batchloader {
         PageID page = new PageID();
         page.set_url(url);
         
-        
-        
-        Integer nonce = Integer.parseInt(time);
-        System.out.println(nonce);
-        
+        Random rand = new Random();
+
+        int nonce = rand.nextInt();
+        System.out.println("Nonce is" + nonce);
         PageViewEdge view = new PageViewEdge(user, page, nonce);
         
         DataUnit du = new DataUnit();
         du.set_view(view);
-        
-        System.out.println(nonce);
-        
-        Pedigree pre = new Pedigree(Integer.parseInt(time));   
+
+        Integer predi = Integer.parseInt(time);        
+        Pedigree pre = new Pedigree(predi);   
         Data result = new Data(pre, du);
-        System.out.println("here");
         
         return result;
     }
 
     private void writeToPail(Data data, TypedRecordOutputStream out) throws IOException {
-    	System.out.println(data.get_pedigree());
 			out.writeObjects(data);
-        // ...
     }
 
     private void importPageviews() {
 
         // change this to "true" if you want to work
         // on the local machines' file system instead of hdfs
-        boolean LOCAL = true;
+        boolean LOCAL = false;
 
         try {
             // set up filesystem
@@ -104,23 +95,19 @@ public class Batchloader {
             String newPath = FileUtils.prepareNewFactsPath(true, LOCAL);
 
             // master pail goes to permanent fact store
-            String masterPath = FileUtils.prepareMasterFactsPath(false, LOCAL);
+            String masterPath = FileUtils.prepareMasterFactsPath(true, LOCAL);
 
             // set up new pail and a stream
-            // ...
             Pail source = Pail.create(fs, newPath, new DataPailStructure());
-            //Pail target = Pail.create(fs, masterPath, new DataPailStructure());
-//            
-//            Pail source = new Pail(newPath);
-            Pail target = new Pail(masterPath);
+            Pail target = Pail.create(fs, masterPath, new DataPailStructure());
+            
             // write facts to new pail
             TypedRecordOutputStream out = source.openWrite();
             readPageviewsAsStream(out);
 	    	out.close();
+	    	
             // set up master pail and absorb new pail
-            // ...
-            
-            target.absorb(source);
+	    	target.absorb(source);
             target.consolidate();
 
         } catch (IOException e) {
@@ -130,7 +117,6 @@ public class Batchloader {
 
     public static void main(String[] args) {
         Batchloader loader = new Batchloader();
-        //loader.readPageviewsAsStream();
         loader.importPageviews();
     }
 }
