@@ -13,17 +13,17 @@ import org.apache.hadoop.fs.FileSystem;
 import com.backtype.hadoop.pail.Pail;
 import com.backtype.hadoop.pail.Pail.TypedRecordOutputStream;
 
-import main.java.de.hska.iwi.bdelab.schema.Data;
-import main.java.de.hska.iwi.bdelab.schema.DataUnit;
-import main.java.de.hska.iwi.bdelab.schema.FriendEdge;
-import main.java.de.hska.iwi.bdelab.schema.GenderType;
-import main.java.de.hska.iwi.bdelab.schema.PageID;
-import main.java.de.hska.iwi.bdelab.schema.PageViewEdge;
-import main.java.de.hska.iwi.bdelab.schema.Pedigree;
-import main.java.de.hska.iwi.bdelab.schema.UserID;
-import main.java.de.hska.iwi.bdelab.schema.UserProperty;
-import main.java.de.hska.iwi.bdelab.schema.UserPropertyValue;
-import test.java.de.hska.iwi.bdelab.batchstore.DataPailStructure;
+import de.hska.iwi.bdelab.schema.Data;
+import de.hska.iwi.bdelab.schema.DataUnit;
+import de.hska.iwi.bdelab.schema.FriendEdge;
+import de.hska.iwi.bdelab.schema.GenderType;
+import de.hska.iwi.bdelab.schema.PageID;
+import de.hska.iwi.bdelab.schema.PageViewEdge;
+import de.hska.iwi.bdelab.schema.Pedigree;
+import de.hska.iwi.bdelab.schema.UserID;
+import de.hska.iwi.bdelab.schema.UserProperty;
+import de.hska.iwi.bdelab.schema.UserPropertyValue;
+import de.hska.iwi.bdelab.batchstore.DataPailStructure;
 
 public class Batchloader {
 
