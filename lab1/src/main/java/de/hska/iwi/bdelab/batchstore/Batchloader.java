@@ -107,8 +107,8 @@ public class Batchloader {
 
             // set up new pail and a stream
             // ...
-            Pail source = Pail..create(fs, newPath, new DataPailStructure());
-            Pail target = Pail..create(fs, masterPath, new DataPailStructure());
+            Pail source = Pail.create(fs, newPath, new DataPailStructure());
+            Pail target = Pail.create(fs, masterPath, new DataPailStructure());
 //            
 //            Pail source = new Pail(newPath);
 //            Pail target = new Pail(masterPath);
