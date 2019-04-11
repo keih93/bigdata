@@ -1,4 +1,4 @@
-package main.java.de.hska.iwi.bdelab.batchstore;
+package de.hska.iwi.bdelab.batchstore;
 
 import java.io.IOException;
 import java.net.URI;
@@ -23,7 +23,8 @@ import de.hska.iwi.bdelab.schema.Pedigree;
 import de.hska.iwi.bdelab.schema.UserID;
 import de.hska.iwi.bdelab.schema.UserProperty;
 import de.hska.iwi.bdelab.schema.UserPropertyValue;
-import de.hska.iwi.bdelab.batchstore.DataPailStructure;
+import manning.tap.DataPailStructure;
+import manning.tap.SplitDataPailStructure;
 
 public class Batchloader {
 
