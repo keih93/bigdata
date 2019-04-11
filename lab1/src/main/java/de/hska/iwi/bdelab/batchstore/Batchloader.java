@@ -64,15 +64,7 @@ public class Batchloader {
         PageID page = new PageID();
         page.set_url(url);
         
-        UserPropertyValue uvalue = new UserPropertyValue();
-        uvalue.set_email("");
-        uvalue.set_full_name("");
-        uvalue.set_gender(GenderType.MALE);
         
-        UserProperty uprop = new UserProperty(user, uvalue);
-        FriendEdge friend = new FriendEdge();
-        friend.set_id1(user);
-        friend.set_id2(user);
         
         Integer nonce = Integer.parseInt(time);
         System.out.println(nonce);
@@ -81,12 +73,10 @@ public class Batchloader {
         
         DataUnit du = new DataUnit();
         du.set_view(view);
-        du.set_friend(friend);
-        du.set_user_property(uprop);
         
         System.out.println(nonce);
         
-        Pedigree pre = new Pedigree(nonce);   
+        Pedigree pre = new Pedigree(Integer.parseInt(time));   
         Data result = new Data(pre, du);
         System.out.println("here");
         
