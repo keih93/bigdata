@@ -104,7 +104,7 @@ public class Batchloader {
             String newPath = FileUtils.prepareNewFactsPath(true, LOCAL);
 
             // master pail goes to permanent fact store
-            String masterPath = FileUtils.prepareMasterFactsPath(true, LOCAL);
+            String masterPath = FileUtils.prepareMasterFactsPath(false, LOCAL);
 
             // set up new pail and a stream
             // ...
