@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
@@ -52,8 +53,10 @@ public class Batchloader {
         String ip = tokenizer.nextToken();
         String url = tokenizer.nextToken();
         String time = tokenizer.nextToken();
+        Integer intime = Integer.parseInt(time);
+        String sdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(intime*1000L));
 
-        System.out.println(ip + "| " + url + "| " + time);
+        System.out.println(ip + "| " + url + "| " + sdate);
         // ... create Data
         UserID user = new UserID();
         user.set_user_id(ip);
