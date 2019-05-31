@@ -61,7 +61,7 @@ public class CountFacts {
 
             // This is how to deserialize a fact (de.hska.iwi.bdelab.schema2.Data object) from incoming pail data
             System.out.println(deserialize(value.getBytes()));
-
+            System.out.println("HIER !!!");
             // a static key results in a single partition on the reducer-side
             output.collect(word, one);
         }
@@ -90,7 +90,6 @@ public class CountFacts {
         conf.setMapperClass(Map.class);
         conf.setCombinerClass(Reduce.class);
         conf.setReducerClass(Reduce.class);
-        System.out.println("hhier !!!");
         ////////////////////////////////////////////////////////////////////////////
         // input as pails
         PailSpec spec = PailFormatFactory.getDefaultCopy().setStructure(new DataPailStructure());
