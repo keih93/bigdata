@@ -89,6 +89,9 @@ public class CountFacts {
         conf.setMapperClass(Map.class);
         conf.setCombinerClass(Reduce.class);
         conf.setReducerClass(Reduce.class);
+
+        conf.setNumMapTasks(3);
+        conf.setNumReduceTasks(3);
         ////////////////////////////////////////////////////////////////////////////
         // input as pails
         PailSpec spec = PailFormatFactory.getDefaultCopy().setStructure(new DataPailStructure());
