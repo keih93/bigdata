@@ -90,7 +90,7 @@ public class CountFacts {
         conf.setMapperClass(Map.class);
         conf.setCombinerClass(Reduce.class);
         conf.setReducerClass(Reduce.class);
-
+        System.out.println("hhier !!!");
         ////////////////////////////////////////////////////////////////////////////
         // input as pails
         PailSpec spec = PailFormatFactory.getDefaultCopy().setStructure(new DataPailStructure());
