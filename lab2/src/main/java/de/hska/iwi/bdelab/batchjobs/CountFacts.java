@@ -61,7 +61,6 @@ public class CountFacts {
 
             // This is how to deserialize a fact (de.hska.iwi.bdelab.schema2.Data object) from incoming pail data
             System.out.println(deserialize(value.getBytes()));
-            System.out.println("HIER !!!");
             // a static key results in a single partition on the reducer-side
             output.collect(word, one);
         }
@@ -74,8 +73,7 @@ public class CountFacts {
                            Reporter reporter) throws IOException {
             int sum = 0;
             while (values.hasNext()) {
-                sum += values.next().get();
-                sum += 1;
+                //sum += values.next().get();
             }
             output.collect(key, new IntWritable(sum));
         }
