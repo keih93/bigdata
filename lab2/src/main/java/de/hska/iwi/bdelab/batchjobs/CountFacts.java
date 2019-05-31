@@ -75,6 +75,7 @@ public class CountFacts {
             int sum = 0;
             while (values.hasNext()) {
                 sum += values.next().get();
+                sum += 1;
             }
             output.collect(key, new IntWritable(sum));
         }
