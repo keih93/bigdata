@@ -104,8 +104,8 @@ public class CountFacts {
         conf.setCombinerClass(Reduce.class);
         conf.setReducerClass(Reduce.class);
 
-        conf.setNumMapTasks(3);
-        conf.setNumReduceTasks(3);
+        conf.setNumMapTasks(10);
+        conf.setNumReduceTasks(10);
         ////////////////////////////////////////////////////////////////////////////
         // input as pails
         PailSpec spec = PailFormatFactory.getDefaultCopy().setStructure(new DataPailStructure());
