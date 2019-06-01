@@ -62,12 +62,17 @@ public class CountFacts {
                 throws IOException {
 
             // This is how to deserialize a fact (de.hska.iwi.bdelab.schema2.Data object) from incoming pail data
-            System.out.println(deserialize(value.getBytes()));
+            //System.out.println(deserialize(value.getBytes()));
             Data data = deserialize(value.getBytes());
-            Integer intime = data.get_pedigree().get_true_as_of_secs();
+            int intime = data.get_pedigree().get_true_as_of_secs();
+            int bucket = intime/3600;
             String sdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(intime*1000L));
+            DataUnit dunit = data.get_dataunit();
+            String page = dunit.get_pageview().get_page().get_url();
             System.out.println("time:" + sdate);
             // a static key results in a single partition on the reducer-side
+            String urlbucket = Integer.toString(bucket) + page;
+            System.out.println(urlbucket);
             output.collect(word, one);
         }
     }
