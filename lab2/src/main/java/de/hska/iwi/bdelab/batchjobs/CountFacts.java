@@ -66,7 +66,7 @@ public class CountFacts {
             Data data = deserialize(value.getBytes());
             int intime = data.get_pedigree().get_true_as_of_secs();
             int bucket = intime/3600;
-            String sdate = new SimpleDateFormat("yyyy-MM-dd HH").format(new Date(intime*1000L));
+            String sdate = new SimpleDateFormat("yyyy-MM-dd/HH").format(new Date(intime*1000L));
             DataUnit dunit = data.get_dataunit();
             String page = dunit.get_pageview().get_page().get_url();
             String niceurl = page.replace("http://", "");
@@ -104,8 +104,8 @@ public class CountFacts {
         conf.setCombinerClass(Reduce.class);
         conf.setReducerClass(Reduce.class);
 
-        conf.setNumMapTasks(10);
-        conf.setNumReduceTasks(10);
+        conf.setNumMapTasks(20);
+        conf.setNumReduceTasks(20);
         ////////////////////////////////////////////////////////////////////////////
         // input as pails
         PailSpec spec = PailFormatFactory.getDefaultCopy().setStructure(new DataPailStructure());
