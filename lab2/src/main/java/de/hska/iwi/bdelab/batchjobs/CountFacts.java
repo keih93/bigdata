@@ -69,10 +69,11 @@ public class CountFacts {
             String sdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(intime*1000L));
             DataUnit dunit = data.get_dataunit();
             String page = dunit.get_pageview().get_page().get_url();
-            System.out.println("time:" + sdate);
+            //System.out.println("time:" + sdate);
             // a static key results in a single partition on the reducer-side
             String urlbucket = Integer.toString(bucket) + page;
-            System.out.println(urlbucket);
+            //System.out.println(urlbucket);
+            word.set(urlbucket);
             output.collect(word, one);
         }
     }
