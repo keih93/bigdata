@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 
 import de.hska.iwi.bdelab.batchstore.FileUtils;
-import de.hska.iwi.bdelab.schema2.Data;
+import de.hska.iwi.bdelab.schema2.*;
 import manning.tap2.DataPailStructure;
 
 import org.apache.hadoop.fs.FileSystem;
