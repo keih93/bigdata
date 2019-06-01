@@ -65,16 +65,13 @@ public class CountFacts {
             //System.out.println(deserialize(value.getBytes()));
             Data data = deserialize(value.getBytes());
             int intime = data.get_pedigree().get_true_as_of_secs();
-            int bucket = intime/3600;
             String sdate = new SimpleDateFormat("yyyy-MM-dd/HH").format(new Date(intime*1000L));
             DataUnit dunit = data.get_dataunit();
             String page = dunit.get_pageview().get_page().get_url();
             String niceurl = page.replace("http://", "");
             String niceurl2 = niceurl.replace("/", "");
-            //System.out.println("time:" + sdate);
             // a static key results in a single partition on the reducer-side
-            String urlbucket = niceurl2 + " "+ sdate; //Integer.toString(bucket);
-            //System.out.println(urlbucket);
+            String urlbucket = niceurl2 + " "+ sdate;
             word.set(urlbucket);
             output.collect(word, one);
         }
