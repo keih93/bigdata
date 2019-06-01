@@ -2,6 +2,8 @@
 package de.hska.iwi.bdelab.batchjobs;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 
 import de.hska.iwi.bdelab.batchstore.FileUtils;
@@ -61,6 +63,10 @@ public class CountFacts {
 
             // This is how to deserialize a fact (de.hska.iwi.bdelab.schema2.Data object) from incoming pail data
             System.out.println(deserialize(value.getBytes()));
+            Data data = deserialize(value.getBytes());
+            Integer intime = data.get_pedigree();
+            String sdate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(intime*1000L));
+            System.out.println("time:" + sdate);
             // a static key results in a single partition on the reducer-side
             output.collect(word, one);
         }
@@ -73,7 +79,7 @@ public class CountFacts {
                            Reporter reporter) throws IOException {
             int sum = 0;
             while (values.hasNext()) {
-                //sum += values.next().get();
+                sum += values.next().get();
             }
             output.collect(key, new IntWritable(sum));
         }
