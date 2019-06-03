@@ -100,8 +100,7 @@ public class CountFacts {
         conf.setMapperClass(Map.class);
         conf.setCombinerClass(Reduce.class);
         conf.setReducerClass(Reduce.class);
-
-        conf.setNumMapTasks(20);
+ 
         conf.setNumReduceTasks(20);
         ////////////////////////////////////////////////////////////////////////////
         // input as pails
