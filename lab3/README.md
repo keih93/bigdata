@@ -18,7 +18,7 @@ Melden Sie sich im LKIT Pool an und starten Sie dort Eclipse. Aktualisieren Sie
 das `bdelab` Git Repository.
 
 ```bash
-cd ~/git/bdelab # bzw eigener Pfad
+cd ~/Documents/bigdata # bzw eigener Pfad
 git pull
 cd lab3
 ```
@@ -31,7 +31,7 @@ den IZ-Accountnamen für HDFS zu spezifizieren. Dazu ist ein Template vorgegeben
 das sie wie folgt kopieren und anpassen können:
 
 ```bash
-cd ~/git/bdelab/lab3/src/main/resources
+cd ~/Documents/bigdata/lab3/src/main/resources
 cp template.hadoop.properties hadoop.properties
 vim hadoop.properties # file editieren
 ```
@@ -42,7 +42,7 @@ Das Projekt basiert auf dem vorherigen Projekt `bdelab2`, daher muss dieses mit
 Maven installiert werden. Dies geschieht wie folgt:
 
 ```bash
-cd ~/git/bdelab/lab2
+cd ~/Documents/bigdata/lab2
 mvn install
 ```
 
@@ -75,15 +75,15 @@ Daten auch in den Master Pail übernommen (sonst nur in den 'New Pail' für neue
 Fakten). Führen Sie an dieser Stelle den Batchloader mit beiden Optionen aus:
 
 ```bash
-~/git/bdelab/lab2/batchloader.sh -r -m -g 1000000
+~/Documents/bigdata/lab2/batchloader.sh -r -m -g 1000000
 ```
 
 Nun starten Sie `CountFacts2` wie folgt:
 
 ```bash
-cd ~/git/bdelab/lab3 # wechseln in Projektordner
+cd ~/Documents/bigdata/lab3 # wechseln in Projektordner
 mvn package # Projekt bauen
-hadoop jar target/bdelab3-0.0.1-SNAPSHOT-jar-with-dependencies.jar de.hska.iwi.bdelab.batchqueries.CountFacts2
+/usr/local/opt/hadoop-2.7.3/bin/hadoop jar target/bdelab3-0.0.1-SNAPSHOT-jar-with-dependencies.jar de.hska.iwi.bdelab.batchqueries.CountFacts2
 ```
 
 Prüfen Sie das Ergebnis. Generieren Sie mehr Daten (Option `-g <records>` z.B.
@@ -98,7 +98,7 @@ von URLs und Vorberechnung von Pageviews für mehrere Intervall-Granularitäten.
 Führen Sie vor dem Start den Batchloader aus:
 
 ```bash
-~/git/bdelab/lab2/batchloader.sh -r -g 1000000 -f ~/git/bdelab/lab3/pageviews2.txt
+~/Documents/bigdata/lab2/batchloader.sh -r -g 1000000 -f ~/Documents/bigdata/lab3/pageviews2.txt
 ```
 
 Dadurch werden alle Dateien zunächst gelöscht und dann 1000000 Einträge in den
@@ -108,7 +108,7 @@ wird eine alternative Basis zur Generierung der Daten verwendet (siehe unten).
 Sie starten den `SimpleBatchWorkflow` mit:
 
 ```bash
-hadoop jar ~/git/bdelab/lab3/target/bdelab3-0.0.1-SNAPSHOT-jar-with-dependencies.jar de.hska.iwi.bdelab.batchqueries.SimpleBatchWorkflow
+/usr/local/opt/hadoop-2.7.3/bin/hadoop jar ~/git/bdelab/lab3/target/bdelab3-0.0.1-SNAPSHOT-jar-with-dependencies.jar de.hska.iwi.bdelab.batchqueries.SimpleBatchWorkflow
 ```
 
 **Aufgabe:** Die Cascalog Query für die URL-Normalisierung ist noch nicht
