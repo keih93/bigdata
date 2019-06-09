@@ -51,37 +51,38 @@ public class SimpleBatchWorkflow extends QueryBase {
                 FileUtils.prepareMasterFactsPath(false, false));
         Tap outTap = dataTap(
                 FileUtils.prepareResultsPath("normalized-by-url", true, false));
+        Api.execute(outTap, new Subquery("?raw").predicate(masterDataset, "_", "?raw"));
 
-        Api.execute(outTap, new Subquery("?normalized").predicate(masterDataset, "_", "?raw")
-                .predicate(new NormalizeURL(), "?raw").out("?normalized"));
+//        Api.execute(outTap, new Subquery("?normalized").predicate(masterDataset, "_", "?raw")
+//                .predicate(new NormalizeURL(), "?raw").out("?normalized"));
     }
 
-    @SuppressWarnings("serial")
-    public static class NormalizeURL extends CascalogFunction {
-        @SuppressWarnings("rawtypes")
-        public void operate(FlowProcess process, FunctionCall call) {
-            Data data = ((Data) call.getArguments().getObject(0)).deepCopy();
-            DataUnit du = data.get_dataunit();
-
-            if (du.getSetField() == DataUnit._Fields.PAGEVIEW) {
-                normalize(du.get_pageview().get_page());
-            }
-            call.getOutputCollector().add(new Tuple(data));
-        }
-
-
-        private void normalize(Page page) {
-            if (page.getSetField() == Page._Fields.URL) {
-                String urlStr = page.get_url();
-                try {
-                    URL url = new URL(urlStr);
-                    page.set_url("http://" + url.getHost() + url.getPath());
-                } catch (MalformedURLException e) {
-                }
-            }
-        }
-
-    }
+//    @SuppressWarnings("serial")
+//    public static class NormalizeURL extends CascalogFunction {
+//        @SuppressWarnings("rawtypes")
+//        public void operate(FlowProcess process, FunctionCall call) {
+//            Data data = ((Data) call.getArguments().getObject(0)).deepCopy();
+//            DataUnit du = data.get_dataunit();
+//
+//            if (du.getSetField() == DataUnit._Fields.PAGEVIEW) {
+//                normalize(du.get_pageview().get_page());
+//            }
+//            call.getOutputCollector().add(new Tuple(data));
+//        }
+//
+//
+//        private void normalize(Page page) {
+//            if (page.getSetField() == Page._Fields.URL) {
+//                String urlStr = page.get_url();
+//                try {
+//                    URL url = new URL(urlStr);
+//                    page.set_url("http://" + url.getHost() + url.getPath());
+//                } catch (MalformedURLException e) {
+//                }
+//            }
+//        }
+//
+//    }
 
     @SuppressWarnings("serial")
     public static class ExtractPageViewFields extends CascalogFunction {
