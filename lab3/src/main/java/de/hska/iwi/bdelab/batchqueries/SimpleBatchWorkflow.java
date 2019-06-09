@@ -14,7 +14,6 @@ import jcascalog.Subquery;
 import de.hska.iwi.bdelab.batchstore.FileUtils;
 import de.hska.iwi.bdelab.schema2.*;
 import java.io.IOException;
-import java.lang.reflect.MalformedURLException;
 
 public class SimpleBatchWorkflow extends QueryBase {
 
@@ -59,14 +58,14 @@ public class SimpleBatchWorkflow extends QueryBase {
             Data data = ((Data) call.getArguments().getObject(0)).deepCopy();
             DataUnit du = data.get_dataunit();
 
-            if (du.getSetField() == DataUnit._Fields.PAGE_VIEW) {
+            if (du.getSetField() == DataUnit._Fields.PAGEVIEW) {
                 normalize(du.get_pageview().get_page());
             }
             call.getOutputCollector().add(new Tuple(data));
         }
     }
 
-    private void normalize(Page page) {
+    private void normalize(PageID page) {
         if (page.getSetField() == Page._FieldsURL) {
             String urlStr = page.get_url();
             try {
