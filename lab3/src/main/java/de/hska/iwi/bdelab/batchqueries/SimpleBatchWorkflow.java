@@ -13,6 +13,7 @@ import jcascalog.Subquery;
 
 import de.hska.iwi.bdelab.batchstore.FileUtils;
 import de.hska.iwi.bdelab.schema2.*;
+
 import java.io.IOException;
 
 public class SimpleBatchWorkflow extends QueryBase {
@@ -50,8 +51,8 @@ public class SimpleBatchWorkflow extends QueryBase {
 
         Api.execute(outTap, new Subquery("?normalized").predicate(masterDataset, "_", "?raw")
                 .predicate(new NormalizeURL(), "?raw").out("?normalized"));
-            }
-            
+    }
+
     @SuppressWarnings("serial")
     public static class NormalizeURL extends CascalogFunction {
         @SuppressWarnings("rawtypes")
@@ -64,16 +65,19 @@ public class SimpleBatchWorkflow extends QueryBase {
             }
             call.getOutputCollector().add(new Tuple(data));
         }
-    }
 
-    private void normalize(Page page) {
-        if (page.getSetField() == Page._FieldsURL) {
-            String urlStr = page.get_url();
-            try {
-                URL url = new URL(urlStr);
-                page.set_url("http://" + url.getHost() + url.getPath());
-            } catch (MalformedURLException e) {}
+
+        private void normalize(Page page) {
+            if (page.getSetField() == Page._FieldsURL) {
+                String urlStr = page.get_url();
+                try {
+                    URL url = new URL(urlStr);
+                    page.set_url("http://" + url.getHost() + url.getPath());
+                } catch (MalformedURLException e) {
+                }
+            }
         }
+    
     }
 
     @SuppressWarnings("serial")
