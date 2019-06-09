@@ -218,3 +218,4 @@ hadoop.properties
 
 .vscode/
 /bin/
+lab2/src/main/java/de/hska/iwi/bdelab/batchstore/test.java

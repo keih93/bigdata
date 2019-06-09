@@ -51,7 +51,6 @@ public class SimpleBatchWorkflow extends QueryBase {
                 FileUtils.prepareMasterFactsPath(false, false));
         Tap outTap = dataTap(
                 FileUtils.prepareResultsPath("normalized-by-url", true, false));
-//        Api.execute(outTap, new Subquery("?raw").predicate(masterDataset, "_", "?raw"));
 
         Api.execute(outTap, new Subquery("?normalized").predicate(masterDataset, "_", "?raw")
                 .predicate(new NormalizeURL(), "?raw").out("?normalized"));
@@ -74,10 +73,11 @@ public class SimpleBatchWorkflow extends QueryBase {
         private void normalize(Page page) {
             if (page.getSetField() == Page._Fields.URL) {
                 String urlStr = page.get_url();
-                String protocol = urlStr.substring(0,urlStr.indexOf("/")+2);
-                String host = urlStr.substring(urlStr.indexOf("/")+2, urlStr.indexOf("/",urlStr.indexOf("/")+2));
-                String path = urlStr.substring(urlStr.indexOf("/",urlStr.indexOf("/")+2));
-                page.set_url(urlStr);
+                try {
+                    URL url = new URL(urlStr);
+                    page.set_url(url.getProtocol() + "://" + url.getHost() + url.getPath());
+                } catch (MalformedURLException e) {
+                }
             }
         }
 
