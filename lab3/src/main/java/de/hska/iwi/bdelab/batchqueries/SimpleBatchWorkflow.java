@@ -74,7 +74,7 @@ public class SimpleBatchWorkflow extends QueryBase {
         private void normalize(Page page) {
             if (page.getSetField() == Page._Fields.URL) {
                 String urlStr = page.get_url();
-                String protocol = urlStr.substring(0,urlStr.indexOf("/")+2));
+                String protocol = urlStr.substring(0,urlStr.indexOf("/")+2);
                 String host = urlStr.substring(urlStr.indexOf("/")+2, urlStr.indexOf("/",urlStr.indexOf("/")+2));
                 String path = urlStr.substring(urlStr.indexOf("/",urlStr.indexOf("/")+2));
                 page.set_url(urlStr);
