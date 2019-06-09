@@ -11,10 +11,13 @@ import cascalog.CascalogFunction;
 import jcascalog.Api;
 import jcascalog.Subquery;
 
+
 import de.hska.iwi.bdelab.batchstore.FileUtils;
 import de.hska.iwi.bdelab.schema2.*;
 
 import java.io.IOException;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 public class SimpleBatchWorkflow extends QueryBase {
 
@@ -68,7 +71,7 @@ public class SimpleBatchWorkflow extends QueryBase {
 
 
         private void normalize(Page page) {
-            if (page.getSetField() == Page._FieldsURL) {
+            if (page.getSetField() == Page._Fields.URL) {
                 String urlStr = page.get_url();
                 try {
                     URL url = new URL(urlStr);
@@ -77,7 +80,7 @@ public class SimpleBatchWorkflow extends QueryBase {
                 }
             }
         }
-    
+
     }
 
     @SuppressWarnings("serial")
