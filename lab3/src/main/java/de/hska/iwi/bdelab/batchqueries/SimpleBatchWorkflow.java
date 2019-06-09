@@ -12,11 +12,9 @@ import jcascalog.Api;
 import jcascalog.Subquery;
 
 import de.hska.iwi.bdelab.batchstore.FileUtils;
-import de.hska.iwi.bdelab.schema2.Data;
-import de.hska.iwi.bdelab.schema2.DataUnit;
-
+import de.hska.iwi.bdelab.schema2.*;
 import java.io.IOException;
-import java.lang.reflect.MalformedParameterizedTypeException;
+import java.lang.reflect.MalformedURLException;
 
 public class SimpleBatchWorkflow extends QueryBase {
 
