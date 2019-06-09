@@ -51,9 +51,10 @@ public class SimpleBatchWorkflow extends QueryBase {
         Api.execute(outTap, new Subquery("?normalized").predicate(masterDataset, "_", "?raw")
                 .predicate(new NormalizeURL(), "?raw").out("?normalized"));
             }
-
+            
+    @SuppressWarnings("serial")
     public static class NormalizeURL extends CascalogFunction {
-
+        @SuppressWarnings("rawtypes")
         public void operate(FlowProcess process, FunctionCall call) {
             Data data = ((Data) call.getArguments().getObject(0)).deepCopy();
             DataUnit du = data.get_dataunit();
@@ -65,7 +66,7 @@ public class SimpleBatchWorkflow extends QueryBase {
         }
     }
 
-    private void normalize(PageID page) {
+    private void normalize(Page page) {
         if (page.getSetField() == Page._FieldsURL) {
             String urlStr = page.get_url();
             try {
