@@ -51,14 +51,9 @@ public class SimpleBatchWorkflow extends QueryBase {
         Tap outTap = dataTap(
                 FileUtils.prepareResultsPath("normalized-by-url", true, false));
 
-        Api.execute(outTap, new Subquery("?normalized").predicate(masterDataset, "_", "?raw").predicate(new NormalizeURL(), "?raw").out("?normalized"));
-
-                ///////////////////////////////////////////////////////////////
-                // HIER FEHLT DIE QUERY LOGIK !
-                ///////////////////////////////////////////////////////////////
-
-        );
-    }
+        Api.execute(outTap, new Subquery("?normalized").predicate(masterDataset, "_", "?raw")
+                .predicate(new NormalizeURL(), "?raw").out("?normalized"));
+            }
 
     public static class NormalizeURL extends CascalogFunction {
 
