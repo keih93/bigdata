@@ -74,11 +74,10 @@ public class SimpleBatchWorkflow extends QueryBase {
         private void normalize(Page page) {
             if (page.getSetField() == Page._Fields.URL) {
                 String urlStr = page.get_url();
-                try {
-                    URL url = new URL(urlStr);
-                    page.set_url("http://" + url.getHost() + url.getPath());
-                } catch (MalformedURLException e) {
-                }
+                String protocol = urlStr.substring(0,urlStr.indexOf("/")+2));
+                String host = urlStr.substring(urlStr.indexOf("/")+2, urlStr.indexOf("/",urlStr.indexOf("/")+2));
+                String path = urlStr.substring(urlStr.indexOf("/",urlStr.indexOf("/")+2));
+                page.set_url(urlStr);
             }
         }
 
@@ -160,6 +159,6 @@ public class SimpleBatchWorkflow extends QueryBase {
     }
 
     public static void main(String[] argv) throws Exception {
-        batchWorkflow();
+                batchWorkflow();
     }
 }
