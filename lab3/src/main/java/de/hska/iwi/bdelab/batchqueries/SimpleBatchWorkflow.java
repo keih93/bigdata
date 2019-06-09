@@ -51,7 +51,7 @@ public class SimpleBatchWorkflow extends QueryBase {
                 FileUtils.prepareMasterFactsPath(false, false));
         Tap outTap = dataTap(
                 FileUtils.prepareResultsPath("normalized-by-url", true, false));
-        Api.execute(outTap, new Subquery("?raw").predicate(masterDataset, "_", "?raw"));
+//        Api.execute(outTap, new Subquery("?raw").predicate(masterDataset, "_", "?raw"));
 
         Api.execute(outTap, new Subquery("?normalized").predicate(masterDataset, "_", "?raw")
                 .predicate(new NormalizeURL(), "?raw").out("?normalized"));
