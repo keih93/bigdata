@@ -20,7 +20,7 @@ public class URLNormalisierungBolt extends NoisyBolt {
         String normalizedURL;
         try {
             URL url = new URL(urlStr);
-            normalizedURL = url.getProtocol() + "://" + url.getHost() + url.getPath());
+            normalizedURL = url.getProtocol() + "://" + url.getHost() + url.getPath();
         } catch (MalformedURLException e) {
             System.err.println("MalformedURLException");
         }
