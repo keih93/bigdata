@@ -24,7 +24,9 @@ public class DataExtractBolt extends NoisyBolt {
             collector.emit(values);
         } else {
             System.err.println("Input must be int the form <IP> <URL> <EPOCH-TIME>");
+            Values values = new Values("error", "error", "error");
         }
+        collector.emit(values);
     }
 
     @Override
