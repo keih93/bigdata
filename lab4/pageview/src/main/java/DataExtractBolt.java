@@ -13,12 +13,14 @@ public class DataExtractBolt extends NoisyBolt {
         System.out.println(getIDs() + " executes tuple: " + tuple);
 
         String sentence = tuple.getString(4);
+
         ArrayList<String> datas = new ArrayList<String>();
         Arrays.stream(sentence.split("\\s"))
                 .forEach(word -> datas.add(word));
         if(datas.size()>3) {
             System.out.println(datas);
-            collector.emit(new Values(datas.get(1) + datas.get(2)));
+            String word = datas.get(1) + datas.get(2);
+            collector.emit(new Values(word));
         }
     }
 
