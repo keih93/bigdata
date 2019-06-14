@@ -14,10 +14,12 @@ public class HourBucketBolt extends NoisyBolt {
         System.out.println(getIDs() + " executes tuple: " + tuple);
 
         String time = tuple.getString(2);
-        int intime = Integer.parseInt(time);
+        String sdate ="";
 
-        String sdate = new SimpleDateFormat("yyyy-MM-dd/HH").format(new Date(intime*1000L));
-
+        if(!time.equals("error")) {
+            int intime = Integer.parseInt(time);
+            sdate = new SimpleDateFormat("yyyy-MM-dd/HH").format(new Date(intime * 1000L));
+        }
         Values values = new Values(tuple.getString(0),tuple.getString(1), sdate);
 
         System.out.println(getIDs() + " result values: " + values);
