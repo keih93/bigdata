@@ -22,7 +22,7 @@ public class DataExtractBolt extends NoisyBolt {
 		if(datas.length > 3){
 			 word = datas[1] + datas[2];
 		}else{
-			 word = "0wrong";
+			 word = sentence;
 		}
 		collector.emit(new Values(word));
 
