@@ -24,6 +24,10 @@ public class FactCountTopology {
 
         builder.setBolt("hourbucket_bolt", new HourBucketBolt(), 2)
                 .fieldsGrouping("urlnormalize_bolt",  new Fields("ip", "normalizedURL","epochtime"));
+
+        builder.setBolt("viewcount_bolt", new FactCountBolt(), 2)
+                .fieldsGrouping("hourbucket_bolt",  new Fields("ip", "normalizedURL", "hourbucket"));
+
         return builder.createTopology();
     }
 

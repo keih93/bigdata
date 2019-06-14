@@ -4,11 +4,10 @@ import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class HourBucketBolt extends NoisyBolt {
-    private Map<String, Integer> counts = new HashMap<>();
 
     @Override
     public void execute(Tuple tuple, BasicOutputCollector collector) {
@@ -16,9 +15,11 @@ public class HourBucketBolt extends NoisyBolt {
 
         String time = tuple.getString(2);
 
-        int hourbucket = Integer.parseInt(time)/(60*60);
 
-        Values values = new Values(tuple.getString(0),tuple.getString(1), hourbucket);
+        String sdate = new SimpleDateFormat("yyyy-MM-dd/HH").format(new Date(intime*1000L));
+
+        Values values = new Values(tuple.getString(0),tuple.getString(1), sdate);
+
         System.out.println(getIDs() + " result values: " + values);
 
         collector.emit(values);
@@ -26,6 +27,6 @@ public class HourBucketBolt extends NoisyBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("word", "count"));
+        declarer.declare(new Fields("ip", "normalizedURL", "hourbucket"));
     }
 }

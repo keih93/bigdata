@@ -14,15 +14,17 @@ public class FactCountBolt extends NoisyBolt {
     public void execute(Tuple tuple, BasicOutputCollector collector) {
         System.out.println(getIDs() + " executes tuple: " + tuple);
 
-        String word = tuple.getString(0);
-        Integer count = counts.get(word);
+        String url = tuple.getString(1);
+        String hourbucket = tuple.getString(2);
+
+        Integer count = counts.get(url+hourbucket);
         if (count == null) {
             count = 0;
         }
         count++;
-        counts.put(word, count);
+        counts.put(url+hourbucket, count);
 
-        Values values = new Values(word, count);
+        Values values = new Values(url, hourbucket, count);
         System.out.println(getIDs() + " total count: " + values);
 
         collector.emit(values);
@@ -30,6 +32,6 @@ public class FactCountBolt extends NoisyBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("url", "count"));
+        declarer.declare(new Fields("url", "hourbucket", "count"));
     }
 }

@@ -68,10 +68,8 @@ public class CountFacts {
             String sdate = new SimpleDateFormat("yyyy-MM-dd/HH").format(new Date(intime*1000L));
             DataUnit dunit = data.get_dataunit();
             String page = dunit.get_pageview().get_page().get_url();
-            String niceurl = page.replace("http://", "");
-            String niceurl2 = niceurl.replace("/", "");
-            // a static key results in a single partition on the reducer-side
-            String urlbucket = niceurl2 + " "+ sdate;
+
+            String urlbucket = page + " "+ sdate;
             word.set(urlbucket);
             output.collect(word, one);
         }
