@@ -13,9 +13,10 @@ public class DataExtractBolt extends NoisyBolt {
         System.out.println(getIDs() + " executes tuple: " + tuple);
 
         String sentence = tuple.getString(4);
-
-        Arrays.stream(sentence.split("\\s"))
-                .forEach(word -> collector.emit(new Values(word)));
+        String word = "random";
+        collector.emit(new Values(word));
+//        Arrays.stream(sentence.split("\\s"))
+//                .forEach(word -> collector.emit(new Values(word)));
 
 //        ArrayList<String> datas = new ArrayList<String>();
 //        Arrays.stream(sentence.split("\\s"))
