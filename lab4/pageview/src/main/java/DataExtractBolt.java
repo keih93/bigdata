@@ -19,12 +19,12 @@ public class DataExtractBolt extends NoisyBolt {
 
         String[] datas = sentence.split("\\s");
         String ip, url, epochTime;
+        Values values;
         if (datas.length >= 3) {
-            Values values = new Values(datas[0], datas[1], datas[2]);
-            collector.emit(values);
+             values = new Values(datas[0], datas[1], datas[2]);
         } else {
             System.err.println("Input must be int the form <IP> <URL> <EPOCH-TIME>");
-            Values values = new Values("error", "error", "error");
+            values = new Values("error", "error", "error");
         }
         collector.emit(values);
     }
