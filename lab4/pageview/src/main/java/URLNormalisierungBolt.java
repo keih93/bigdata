@@ -7,7 +7,7 @@ import org.apache.storm.tuple.Values;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WordCountBolt extends NoisyBolt {
+public class URLNormalisierungBolt extends NoisyBolt {
     private Map<String, Integer> counts = new HashMap<>();
 
     @Override
