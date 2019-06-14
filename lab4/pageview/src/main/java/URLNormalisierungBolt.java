@@ -17,7 +17,7 @@ public class URLNormalisierungBolt extends NoisyBolt {
         System.out.println(getIDs() + " executes tuple: " + tuple);
 
         String urlStr = tuple.getString(1);
-        String normalizedURL;
+        String normalizedURL = "";
         try {
             URL url = new URL(urlStr);
             normalizedURL = url.getProtocol() + "://" + url.getHost() + url.getPath();
