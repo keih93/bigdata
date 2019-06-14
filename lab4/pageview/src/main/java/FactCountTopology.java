@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class WordcountTopology {
+public class FactCountTopology {
 
     private static StormTopology buildTopology(){
         TopologyBuilder builder = new TopologyBuilder();

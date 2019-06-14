@@ -142,14 +142,14 @@ bin/kafka-console-consumer.sh --bootstrap-server iwi-lkit-ux-06:9092 --topic sen
 
 ### Storm Topologie ausführen
 
-Öffnen Sie das *storm-word-count Projekt* in Ihrer IDE. `WordcountTopology` ist
+Öffnen Sie das *storm-word-count Projekt* in Ihrer IDE. `FactCountTopology` ist
 im Package `de.hska.iwi.vsys.bdelab.streaming` spezifiziert. Die Topologie nutzt
 [storm-kafka-client](https://github.com/apache/storm/tree/v1.0.2/external/storm-kafka-client)
 zur Definition des `PageViewSpout` (als *Consumer* des Kafka Topics
 `sentence_<IZ-ID>`). **Achtung:** Ersetzen Sie `sentence_<IZ-ID>` in
 `PageViewSpout.java` durch ihre Kennung.
 
-Bauen Sie dann das Projekt und starten Sie `WordcountTopology` als
+Bauen Sie dann das Projekt und starten Sie `FactCountTopology` als
 Java-Anwendung in der IDE. Alternativ können Sie auch maven zur Ausführung im
 Terminal nutzen:
 
@@ -161,7 +161,7 @@ mvn exec:java
 
 Geben Sie nun einige Sätze in den Command Line Producer ein und beobachten Sie
 die Ausgaben der Topologie, um die Verarbeitung nachzuverfolgen. (Sie können
-auch in der der `WordcountTopology` die Debug-Ausgabe aktivieren, um u.a. das
+auch in der der `FactCountTopology` die Debug-Ausgabe aktivieren, um u.a. das
 "Acking" der Tupel zu beobachten.)
 
 Versuchen Sie, die Implementierung der Topologie mit Spout und Bolts

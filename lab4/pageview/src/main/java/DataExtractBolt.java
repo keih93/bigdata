@@ -4,6 +4,7 @@ import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.tuple.Values;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DataExtractBolt extends NoisyBolt {
@@ -12,8 +13,10 @@ public class DataExtractBolt extends NoisyBolt {
         System.out.println(getIDs() + " executes tuple: " + tuple);
 
         String sentence = tuple.getString(4);
+        ArrayList<String> datas = new ArrayList<String>();
         Arrays.stream(sentence.split("\\s"))
-                .forEach(word -> collector.emit(new Values(word)));
+                .forEach(word -> datas.add(word));
+        collector.emit(datas.get(1)+datas.get(2));
     }
 
     @Override

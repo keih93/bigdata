@@ -67,7 +67,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>WordcountTopology</mainClass>
+                    <mainClass>FactCountTopology</mainClass>
                 </configuration>
             </plugin>
             <plugin>
