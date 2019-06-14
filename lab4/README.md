@@ -145,9 +145,9 @@ bin/kafka-console-consumer.sh --bootstrap-server iwi-lkit-ux-06:9092 --topic sen
 Öffnen Sie das *storm-word-count Projekt* in Ihrer IDE. `WordcountTopology` ist
 im Package `de.hska.iwi.vsys.bdelab.streaming` spezifiziert. Die Topologie nutzt
 [storm-kafka-client](https://github.com/apache/storm/tree/v1.0.2/external/storm-kafka-client)
-zur Definition des `SentenceSpout` (als *Consumer* des Kafka Topics
+zur Definition des `PageViewSpout` (als *Consumer* des Kafka Topics
 `sentence_<IZ-ID>`). **Achtung:** Ersetzen Sie `sentence_<IZ-ID>` in
-`SentenceSpout.java` durch ihre Kennung.
+`PageViewSpout.java` durch ihre Kennung.
 
 Bauen Sie dann das Projekt und starten Sie `WordcountTopology` als
 Java-Anwendung in der IDE. Alternativ können Sie auch maven zur Ausführung im
