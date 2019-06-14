@@ -154,7 +154,7 @@ Java-Anwendung in der IDE. Alternativ können Sie auch maven zur Ausführung im
 Terminal nutzen:
 
 ```bash
-cd ~/git/bdelab # bzw eigener Pfad des Repositories
+cd ~/Documents/bigdata # bzw eigener Pfad des Repositories
 cd lab4/stormwordcount
 mvn exec:java
 ```
