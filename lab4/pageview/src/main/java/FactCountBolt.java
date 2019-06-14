@@ -23,13 +23,13 @@ public class FactCountBolt extends NoisyBolt {
         counts.put(word, count);
 
         Values values = new Values(word, count);
-        System.out.println(getIDs() + " result values: " + values);
+        System.out.println(getIDs() + " total count: " + values);
 
         collector.emit(values);
     }
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("word", "count"));
+        declarer.declare(new Fields("url", "count"));
     }
 }
