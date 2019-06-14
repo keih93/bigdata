@@ -8,28 +8,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DataExtractBolt extends NoisyBolt {
-	@Override
-	public void execute(Tuple tuple, BasicOutputCollector collector) {
-		System.out.println(getIDs() + " executes tuple: " + tuple);
+    @Override
+    public void execute(Tuple tuple, BasicOutputCollector collector) {
+        System.out.println(getIDs() + " executes tuple: " + tuple);
 
-		String sentence = tuple.getString(4);
+        String sentence = tuple.getString(4);
 //        collector.emit(new Values(sentence));
 //        Arrays.stream(sentence.split("\\s"))
 //                .forEach(word -> collector.emit(new Values(word)));
 
-		String[] datas = sentence.split("\\s");
-		String word;
-		if(datas.length >= 3){
-			 word = datas[1] +" "+ datas[2];
-		}else{
-			 word = "wrong";
-		}
-		collector.emit(new Values(word));
+        String[] datas = sentence.split("\\s");
+        String ip, url, epochTime;
+        if (datas.length >= 3) {
+            Values values = new Values(datas[0], datas[1], datas[2]);
+            collector.emit(values);
+        } else {
+            System.err.println("Input must be int the form <IP> <URL> <EPOCH-TIME>");
+        }
+    }
 
-	}
-
-	@Override
-	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("url"));
-	}
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declare(new Fields("url"));
+    }
 }
