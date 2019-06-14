@@ -14,7 +14,7 @@ public class HourBucketBolt extends NoisyBolt {
         System.out.println(getIDs() + " executes tuple: " + tuple);
 
         String time = tuple.getString(2);
-
+        int intime = Integer.parseInt(time);
 
         String sdate = new SimpleDateFormat("yyyy-MM-dd/HH").format(new Date(intime*1000L));
 
