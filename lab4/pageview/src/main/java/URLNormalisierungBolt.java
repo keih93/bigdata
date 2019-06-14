@@ -30,9 +30,9 @@ public class URLNormalisierungBolt extends NoisyBolt {
             count = 0;
         }
         count++;
-        counts.put(urlStr, count);
+        counts.put(normalizedURL, count);
 
-        Values values = new Values(urlStr, count);
+        Values values = new Values(normalizedURL, count);
         System.out.println(getIDs() + " result values: " + values);
 
         collector.emit(values);
