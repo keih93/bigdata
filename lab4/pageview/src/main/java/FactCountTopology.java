@@ -16,7 +16,7 @@ public class FactCountTopology {
 
         builder.setSpout("kafka_spout", new PageViewSpout(), 1);
 
-        builder.setBolt("extract_bolt", new DataExtractBolt(), 2)
+        builder.setBolt("split_bolt", new DataExtractBolt(), 2)
                 .shuffleGrouping("kafka_spout", PageViewSpout.STREAM_NAME);
 
         builder.setBolt("count_bolt", new FactCountBolt(), 2)
