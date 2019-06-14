@@ -31,6 +31,6 @@ public class DataExtractBolt extends NoisyBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("url"));
+        declarer.declare(new Fields("ip","url","epochtime"));
     }
 }
