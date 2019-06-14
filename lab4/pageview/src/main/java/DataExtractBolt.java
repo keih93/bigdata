@@ -17,9 +17,12 @@ public class DataExtractBolt extends NoisyBolt {
 //        Arrays.stream(sentence.split("\\s"))
 //                .forEach(word -> collector.emit(new Values(word)));
 
-		ArrayList<String> datas = new ArrayList<String>();
-		Arrays.stream(sentence.split("\\s")).forEach(word -> datas.add(word));
-		String word = datas.get(1) + datas.get(2);
+		String[] datas = sentence.split("\\s");
+		if(datas.length > 3){
+			String word = datas[1] + datas[2];
+		}else{
+			String word = sentence;
+		}
 		collector.emit(new Values(word));
 
 	}
