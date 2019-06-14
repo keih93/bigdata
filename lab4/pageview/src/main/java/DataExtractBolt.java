@@ -14,14 +14,17 @@ public class DataExtractBolt extends NoisyBolt {
 
         String sentence = tuple.getString(4);
 
-        ArrayList<String> datas = new ArrayList<String>();
         Arrays.stream(sentence.split("\\s"))
-                .forEach(word -> datas.add(word));
-        if(datas.size()>3) {
-            System.out.println(datas);
-            String word = datas.get(1) + datas.get(2);
-            collector.emit(new Values(word));
-        }
+                .forEach(word -> collector.emit(new Values(word)));
+
+//        ArrayList<String> datas = new ArrayList<String>();
+//        Arrays.stream(sentence.split("\\s"))
+//                .forEach(word -> datas.add(word));
+//        if(datas.size()>3) {
+//            System.out.println(datas);
+//            String word = datas.get(1) + datas.get(2);
+//            collector.emit(new Values(word));
+//        }
     }
 
     @Override
