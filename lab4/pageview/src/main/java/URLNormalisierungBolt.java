@@ -25,14 +25,8 @@ public class URLNormalisierungBolt extends NoisyBolt {
             System.err.println("MalformedURLException");
         }
 
-        Integer count = counts.get(normalizedURL);
-        if (count == null) {
-            count = 0;
-        }
-        count++;
-        counts.put(normalizedURL, count);
 
-        Values values = new Values(normalizedURL, count);
+        Values values = new Values(tuple.getString(0),normalizedURL, tuple.getString(2));
         System.out.println(getIDs() + " result values: " + values);
 
         collector.emit(values);
@@ -40,6 +34,6 @@ public class URLNormalisierungBolt extends NoisyBolt {
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("word", "count"));
+        declarer.declare(new Fields("ip", "normalizedURL","epochtime"));
     }
 }
