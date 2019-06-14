@@ -16,22 +16,23 @@ public class URLNormalisierungBolt extends NoisyBolt {
     public void execute(Tuple tuple, BasicOutputCollector collector) {
         System.out.println(getIDs() + " executes tuple: " + tuple);
 
-        String word = tuple.getString(1);
-//        String urlStr = page.get_url();
-//        try {
-//            URL url = new URL(urlStr);
-//            page.set_url(url.getProtocol() + "://" + url.getHost() + url.getPath());
-//        } catch (MalformedURLException e) {
-//        }
+        String urlStr = tuple.getString(1);
+        String normalizedURL;
+        try {
+            URL url = new URL(urlStr);
+            normalizedURL = url.getProtocol() + "://" + url.getHost() + url.getPath());
+        } catch (MalformedURLException e) {
+            System.err.println("MalformedURLException");
+        }
 
-        Integer count = counts.get(word);
+        Integer count = counts.get(normalizedURL);
         if (count == null) {
             count = 0;
         }
         count++;
-        counts.put(word, count);
+        counts.put(urlStr, count);
 
-        Values values = new Values(word, count);
+        Values values = new Values(urlStr, count);
         System.out.println(getIDs() + " result values: " + values);
 
         collector.emit(values);
