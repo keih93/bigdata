@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class URLNormalisierungBolt extends NoisyBolt {
-    private Map<String, Integer> counts = new HashMap<>();
 
     @Override
     public void execute(Tuple tuple, BasicOutputCollector collector) {

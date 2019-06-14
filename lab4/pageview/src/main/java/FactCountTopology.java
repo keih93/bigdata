@@ -16,14 +16,14 @@ public class FactCountTopology {
 
         builder.setSpout("kafka_spout", new PageViewSpout(), 1);
 
-        builder.setBolt("split_bolt", new DataExtractBolt(), 2)
+        builder.setBolt("dataextract_bolt", new DataExtractBolt(), 2)
                 .shuffleGrouping("kafka_spout", PageViewSpout.STREAM_NAME);
 
         builder.setBolt("urlnormalize_bolt", new URLNormalisierungBolt(), 2)
-                .fieldsGrouping("split_bolt",  new Fields("ip","url","epochtime"));
+                .fieldsGrouping("dataextract_bolt",  new Fields("ip","url","epochtime"));
 
-//        builder.setBolt("count_bolt", new URLNormalisierungBolt(), 2)
-//                .fieldsGrouping("split_bolt",  new Fields("ip","url","epochtime"));
+        builder.setBolt("hourbucket_bolt", new HourBucketBolt(), 2)
+                .fieldsGrouping("urlnormalize_bolt",  new Fields("ip", "normalizedURL","epochtime"));
         return builder.createTopology();
     }
 
