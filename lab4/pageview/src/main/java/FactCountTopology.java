@@ -20,7 +20,7 @@ public class FactCountTopology {
                 .shuffleGrouping("kafka_spout", PageViewSpout.STREAM_NAME);
 
         builder.setBolt("count_bolt", new URLNormalisierungBolt(), 2)
-                .fieldsGrouping("split_bolt", new Fields("url"));
+                .fieldsGrouping("split_bolt",  new Fields("ip","url","epochtime"));
 
         return builder.createTopology();
     }
