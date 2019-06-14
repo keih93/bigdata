@@ -8,27 +8,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DataExtractBolt extends NoisyBolt {
-    @Override
-    public void execute(Tuple tuple, BasicOutputCollector collector) {
-        System.out.println(getIDs() + " executes tuple: " + tuple);
+	@Override
+	public void execute(Tuple tuple, BasicOutputCollector collector) {
+		System.out.println(getIDs() + " executes tuple: " + tuple);
 
-        String sentence = tuple.getString(4);
-        collector.emit(new Values(sentence));
+		String sentence = tuple.getString(4);
+//        collector.emit(new Values(sentence));
 //        Arrays.stream(sentence.split("\\s"))
 //                .forEach(word -> collector.emit(new Values(word)));
 
-//        ArrayList<String> datas = new ArrayList<String>();
-//        Arrays.stream(sentence.split("\\s"))
-//                .forEach(word -> datas.add(word));
-//        if(datas.size()>3) {
-//            System.out.println(datas);
-//            String word = datas.get(1) + datas.get(2);
-//            collector.emit(new Values(word));
-//        }
-    }
+		ArrayList<String> datas = new ArrayList<String>();
+		Arrays.stream(sentence.split("\\s")).forEach(word -> datas.add(word));
+		String word = datas.get(1) + datas.get(2);
+		collector.emit(new Values(word));
 
-    @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declare(new Fields("url"));
-    }
+	}
+
+	@Override
+	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		declarer.declare(new Fields("url"));
+	}
 }
