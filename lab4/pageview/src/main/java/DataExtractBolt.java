@@ -19,10 +19,10 @@ public class DataExtractBolt extends NoisyBolt {
 
 		String[] datas = sentence.split("\\s");
 		String word;
-		if(datas.length > 3){
+		if(datas.length >= 3){
 			 word = datas[1] + datas[2];
 		}else{
-			 word = sentence;
+			 word = "wrong";
 		}
 		collector.emit(new Values(word));
 

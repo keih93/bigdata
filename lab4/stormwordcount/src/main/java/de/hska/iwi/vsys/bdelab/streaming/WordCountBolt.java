@@ -25,8 +25,6 @@ public class WordCountBolt extends NoisyBolt {
         counts.put(word, count);
 
         Values values = new Values(word, count);
-        String splittest = word.split(" ")[0];
-        System.out.println(splittest);
         System.out.println(getIDs() + " result values: " + values);
 
         collector.emit(values);
