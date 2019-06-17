@@ -129,7 +129,7 @@ bin/kafka-topics.sh --create --zookeeper iwi-lkit-ux-06:2181 --replication-facto
   `--broker-list localhost:9092` durch `--broker-list iwi-lkit-ux-06:9092`
 
 ```bash
-bin/kafka-console-producer.sh --broker-list iwi-lkit-ux-06:9092 --topic sentence_<IZ-ID>
+bin/kafka-console-producer.sh --broker-list iwi-lkit-ux-06:9092 --topic pageview_ngng1012
 ```
 
 - Ersetzen Sie beim Aufruf von `kafka-console-consumer.sh` die Option

@@ -80,31 +80,31 @@ sich auf der Hadoop Webseite.
 Zunächst werden nun Eingabedaten in das HDFS geschrieben:
 
 ```bash
-hadoop fs -mkdir -p /user/$USER/wc/in
+/usr/local/opt/hadoop-2.7.3/bin/hadoop fs -mkdir -p /user/$USER/wc/in
 echo "Hello World Bye World" > file01
 echo "Hello Hadoop Goodbye Hadoop" > file02
-hadoop fs -put file01 /user/$USER/wc/in
-hadoop fs -put file02 /user/$USER/wc/in
+/usr/local/opt/hadoop-2.7.3/bin/hadoop fs -put file01 /user/$USER/wc/in
+/usr/local/opt/hadoop-2.7.3/bin/hadoop fs -put file02 /user/$USER/wc/in
 ```
 
 Dann kann der Job gestartet werden:
 
 ```bash
-hadoop jar ~/git/bdelab/lab2/target/bdelab2-0.0.1-SNAPSHOT-jar-with-dependencies.jar de.hska.iwi.bdelab.batchjobs.WordCountOldAPI /user/$USER/wc/in /user/$USER/wc/out
+/usr/local/opt/hadoop-2.7.3/bin/hadoop jar ~/git/bdelab/lab2/target/bdelab2-0.0.1-SNAPSHOT-jar-with-dependencies.jar de.hska.iwi.bdelab.batchjobs.WordCountOldAPI /user/$USER/wc/in /user/$USER/wc/out
 ```
 
 Das Ergebnis findet sich im Anschluss im HDFS:
 
 ```bash
-hadoop fs -cat /user/<IZ-Name>/wc/out/part-00000
+/usr/local/opt/hadoop-2.7.3/bin/hadoop fs -cat /user/<IZ-Name>/wc/out/part-00000
 ```
 
 Zur Wiederholung des Experiments muss der Ordner `wc/out` wieder gelöscht
 werden:
 
 ```bash
-hadoop fs -rm -skipTrash /user/$USER/wc/out/*
-hadoop fs -rmdir /user/$USER/wc/out
+/usr/local/opt/hadoop-2.7.3/bin/hadoop fs -rm -skipTrash /user/$USER/wc/out/*
+/usr/local/opt/hadoop-2.7.3/bin/hadoop fs -rmdir /user/$USER/wc/out
 ```
 
 #### Aufgabe 2.2 (Pageviews)
@@ -145,13 +145,13 @@ wie folgt:
 Dann kann der Job gestartet werden:
 
 ```bash
-hadoop jar ~/git/bdelab/lab2/target/bdelab2-0.0.1-SNAPSHOT-jar-with-dependencies.jar de.hska.iwi.bdelab.batchjobs.CountFacts
+/usr/local/opt/hadoop-2.7.3/bin/hadoop jar target/bdelab2-0.0.1-SNAPSHOT-jar-with-dependencies.jar de.hska.iwi.bdelab.batchjobs.CountFacts
 ```
 
 Das Ergebnis findet sich im Anschluss im HDFS:
 
 ```bash
-hadoop fs -cat /user/$USER/bdetmp/fact-count/part-00000
+/usr/local/opt/hadoop-2.7.3/bin/hadoop fs -cat /user/$USER/bdetmp/fact-count/part-00000
 ```
 
 Schauen sie sich den Quelltext von `CountFacts` an. Dort sehen Sie die
